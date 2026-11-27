@@ -1,0 +1,52 @@
+{
+  "format": "easyaction/1",
+  "id": "three_towns",
+  "name": { "th": "ปีนป่ายสามเมือง", "en": "Three Towns Action", "ms": "Aksi Tiga Pekan" },
+  "levels": [
+    {
+      "id": "ban_na_di_rooftops",
+      "name": { "th": "ชานบ้านนาดี", "en": "Ban Na Di verandas", "ms": "Beranda Ban Na Di" },
+      "scene": "town_ban_na_di",
+      "width": 880,
+      "height": 272,
+      "groundY": 224,
+      "solids": [
+        { "x": 26, "y": 214, "w": 20, "h": 10 },
+        { "x": 279, "y": 214, "w": 20, "h": 10 },
+        { "x": 658, "y": 214, "w": 20, "h": 10 },
+        { "x": 808, "y": 214, "w": 20, "h": 10 }
+      ],
+      "platforms": [
+        { "x": 66, "y": 183, "w": 126 },
+        { "x": 344, "y": 183, "w": 126 },
+        { "x": 622, "y": 195, "w": 92 },
+        { "x": 214, "y": 150, "w": 40 }
+      ],
+      "ladders": [
+        { "x": 164, "y": 183, "w": 20, "h": 41 },
+        { "x": 442, "y": 183, "w": 20, "h": 41 }
+      ],
+      "spawn": [40, 224],
+      "pickups": [
+        { "id": "c1", "x": 100, "y": 170, "coins": 1 },
+        { "id": "c2", "x": 234, "y": 137, "coins": 2 },
+        { "id": "c3", "x": 400, "y": 170, "coins": 1 },
+        { "id": "c4", "x": 668, "y": 182, "coins": 1 }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "id": "monkey_raid",
+      "name": { "th": "ลิงจอมซนบุกสวน", "en": "Monkey raid", "ms": "Serbuan monyet" },
+      "width": 480,
+      "enemies": [{ "id": "monkey_thief", "level": 2 }, { "id": "paddy_crab", "level": 2 }]
+    },
+    {
+      "id": "field_pests",
+      "name": { "th": "ศัตรูพืชในนา", "en": "Field pests", "ms": "Perosak sawah" },
+      "width": 480,
+      "enemies": [{ "id": "field_rat" }, { "id": "apple_snail" }, { "id": "field_rat" }]
+    }
+  ]
+}
