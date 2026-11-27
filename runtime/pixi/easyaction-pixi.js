@@ -205,8 +205,9 @@ export async function loadAction(PIXI, url = "easyaction.json") {
         const p = label(`${a.damage}${a.crit ? "!" : ""}`, to.body.x, to.body.y - 40, a.crit ? 0xffd23f : 0xffffff, a.crit ? 13 : 11);
         fxl.addChild(p);
         pops.push({ p, life: 0.8 });
-        o.onHit?.(a);
-        if (o.fx) o.fx.play(fxl, "hit_sparks", to.body.x, to.body.y - 18);
+        // view-side extras must never break the simulation step
+        try { o.onHit?.(a); } catch (e) { console.warn("easyaction onHit:", e); }
+        if (o.fx && o.hitFx !== null) try { o.fx.play(fxl, o.hitFx ?? "hit_sparks", to.body.x, to.body.y - 18); } catch (e) { console.warn("easyaction hit fx:", e); }
       }
       if (ev === "end") {
         const msg = label(t(`action.${a}`, lang), W / 2, H / 2, 0xffe08a, 20);

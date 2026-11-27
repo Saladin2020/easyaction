@@ -33,7 +33,7 @@ Damage uses the Easy Battle formula (atk vs def, ±10 % variance, crit). Hero st
 - **PixiJS** (`easyaction-pixi.js` + `easyaction-core.js`):
   - `const ea = await loadAction(PIXI, "easyaction.json")`.
   - `ea.platformer(container, {level, sheet})` returns `key()`, `update(dt)`, `tick(input)`, `on("pickup")`, `body` and `anim`.
-  - `ea.skirmish(app, {encounter, battle, party, heroSheets, enemyArt, background, onEnd})` shows HP bars, damage pops and a result banner.
+  - `ea.skirmish(app, {encounter, battle, party, heroSheets, enemyArt, background, groundY, fx, hitFx, onHit, onEnd})` shows HP bars, damage pops and a result banner.
   - Easy Sprite side sheets are 48 px, 30×3: idle 0, run 4–7, jump 8, fall 9, attack 18–19, hurt 20–21, down 22–23. Ladders use the front row.
 - **Godot**: `EasyActionCore` (physics + combat port), `EasyActionPlayer` (CharacterBody-free fixed-tick platformer node) and `EasySkirmishView` (signal `finished(result, rewards)`). The export includes `test_action.gd` (parity) and a playable `main.tscn`.
 
