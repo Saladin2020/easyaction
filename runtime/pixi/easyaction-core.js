@@ -56,6 +56,10 @@ function stepBody(b, inp, lvl, P) {
   b.buffer = inp.jumpPressed ? P.buffer : Math.max(0, b.buffer - 1);
   b.coyote = b.onGround ? P.coyote : Math.max(0, b.coyote - 1);
   const dropThrough = Boolean(inp.down && inp.jumpPressed && b.onGround && standingOnPlatform(b, lvl));
+  if (dropThrough) {
+    b.buffer = 0;
+    b.coyote = 0;
+  }
   if (b.climbing) {
     b.vx = dir * P.climb * 0.5;
     b.vy = ((inp.down ? 1 : 0) - (inp.up ? 1 : 0)) * P.climb;
@@ -334,9 +338,9 @@ var Skirmish = class {
     const beaten = this.fighters.filter((f) => f.side === "enemy" && f.hp <= 0);
     return { xp: beaten.reduce((a, f) => a + (f.xp ?? 0), 0), coins: beaten.reduce((a, f) => a + (f.coins ?? 0), 0), party: this.fighters.filter((f) => f.side === "hero").map((f) => ({ id: f.id, hp: f.hp })) };
   }
-  /** Compact state for parity tests: tick, result, then id:hp:x:y per fighter (x / y to 3 decimals). */
+  /** Compact state for parity tests: tick, result, then id:hp:round(x×1000):round(y×1000) per fighter. */
   digest() {
-    return [this.tick, this.result, ...this.fighters.map((f) => `${f.id}:${f.hp}:${f.body.x.toFixed(3)}:${f.body.y.toFixed(3)}`)].join("|");
+    return [this.tick, this.result, ...this.fighters.map((f) => `${f.id}:${f.hp}:${Math.round(f.body.x * 1e3)}:${Math.round(f.body.y * 1e3)}`)].join("|");
   }
 };
 function simulateSkirmish(fighters, level, seed, opts = {}) {
@@ -441,6 +445,45 @@ function docSummary(doc) {
   const r = resolveDoc(doc);
   return { id: r.id, name: r.name, levels: r.levels.map((l) => ({ id: l.id, name: l.name, scene: l.scene ?? null, width: l.width, platforms: l.platforms.length, ladders: l.ladders.length, pickups: l.pickups?.length ?? 0 })), encounters: r.encounters.map((e) => ({ id: e.id, name: e.name, enemies: e.enemies.map((x) => x.id) })), jump: jumpReach(r.physics) };
 }
+
+// src/shared/parity.ts
+var rep = (n, i) => Array.from({ length: n }, () => ({ ...i }));
+function parityScripts() {
+  return {
+    run_jump: { script: [...rep(30, { right: true }), { right: true, jump: true, jumpPressed: true }, ...rep(40, { right: true, jump: true }), ...rep(20, {})] },
+    short_hop: { script: [...rep(10, { right: true }), { jump: true, jumpPressed: true }, ...rep(3, { jump: true }), ...rep(40, {})] },
+    ladder: { start: [150, 224], script: [...rep(16, { right: true }), ...rep(50, { up: true }), ...rep(30, { left: true }), { jump: true, jumpPressed: true }, ...rep(50, { left: true, jump: true })] },
+    drop_through: { start: [120, 183], script: [...rep(5, {}), { down: true, jump: true, jumpPressed: true }, ...rep(40, { down: true })] },
+    left_wall: { start: [80, 224], script: [...rep(60, { left: true }), { jump: true, jumpPressed: true }, ...rep(30, { left: true, jump: true })] },
+    platform_hops: { start: [190, 183], script: [...rep(5, { right: true }), { right: true, jump: true, jumpPressed: true }, ...rep(25, { right: true, jump: true }), ...rep(20, { right: true }), { right: true, jump: true, jumpPressed: true }, ...rep(60, { right: true, jump: true })] }
+  };
+}
+function pathLine(name, pts) {
+  const samples = pts.filter((_, i) => i % 15 === 14 || i === pts.length - 1).map(([x, y, a]) => `${Math.round(x * 1e3)},${Math.round(y * 1e3)},${a}`);
+  return `P| ${name} ${samples.join(";")}`;
+}
+function skirmishCases(doc, db) {
+  const party = [{ id: db.heroes[0].id, level: 3 }, ...db.heroes[3] ? [{ id: db.heroes[3].id, level: 3, tree: (db.heroes[3].tree ?? []).slice(0, 1).map((n) => n.id) }] : []];
+  const out = [];
+  for (const e of doc.encounters)
+    for (const seed of [1, 7, 20261127]) {
+      const level = e.level ? doc.levels.find((l) => l.id === e.level) : arena(e.width ?? 480);
+      out.push({ name: `${e.id}:${seed}`, fighters: fightersFromBattle(db, party, e.enemies, level.width), level, seed });
+    }
+  const strong = db.enemies.reduce((a, b) => b.stats.atk > a.stats.atk ? b : a);
+  out.push({ name: `solo_vs_${strong.id}:3`, fighters: fightersFromBattle(db, [{ id: db.heroes[0].id, level: 1 }], [{ id: strong.id, level: strong.level + 2 }], 480), level: arena(480), seed: 3 });
+  return out;
+}
+function parityLines(doc, db) {
+  const lines = [];
+  const lvl = doc.levels[0];
+  for (const [name, c] of Object.entries(parityScripts())) lines.push(pathLine(name, simulatePath(lvl, doc.physics, c.script, c.start)));
+  for (const c of skirmishCases(doc, db)) {
+    const r = simulateSkirmish(c.fighters, c.level, c.seed, { physics: doc.physics, combat: doc.combat });
+    lines.push(`S| ${c.name} ${r.result} ${r.hits} ${r.digest}`);
+  }
+  return lines;
+}
 export {
   DEFAULT_COMBAT,
   DEFAULT_MOVES,
@@ -461,9 +504,13 @@ export {
   mulberry32,
   newBody,
   onLadder,
+  parityLines,
+  parityScripts,
+  pathLine,
   resolveDoc,
   simulatePath,
   simulateSkirmish,
+  skirmishCases,
   stepBody,
   t,
   validateDoc

@@ -82,6 +82,10 @@ export function stepBody(b: Body, inp: Input, lvl: Level, P: Physics): Body {
   b.buffer = inp.jumpPressed ? P.buffer : Math.max(0, b.buffer - 1);
   b.coyote = b.onGround ? P.coyote : Math.max(0, b.coyote - 1);
   const dropThrough = Boolean(inp.down && inp.jumpPressed && b.onGround && standingOnPlatform(b, lvl));
+  if (dropThrough) {
+    b.buffer = 0;
+    b.coyote = 0;
+  }
   if (b.climbing) {
     b.vx = dir * P.climb * 0.5;
     b.vy = ((inp.down ? 1 : 0) - (inp.up ? 1 : 0)) * P.climb;

@@ -264,9 +264,9 @@ export class Skirmish {
     return { xp: beaten.reduce((a, f) => a + (f.xp ?? 0), 0), coins: beaten.reduce((a, f) => a + (f.coins ?? 0), 0), party: this.fighters.filter((f) => f.side === "hero").map((f) => ({ id: f.id, hp: f.hp })) };
   }
 
-  /** Compact state for parity tests: tick, result, then id:hp:x:y per fighter (x / y to 3 decimals). */
+  /** Compact state for parity tests: tick, result, then id:hp:round(x×1000):round(y×1000) per fighter. */
   digest(): string {
-    return [this.tick, this.result, ...this.fighters.map((f) => `${f.id}:${f.hp}:${f.body.x.toFixed(3)}:${f.body.y.toFixed(3)}`)].join("|");
+    return [this.tick, this.result, ...this.fighters.map((f) => `${f.id}:${f.hp}:${Math.round(f.body.x * 1000)}:${Math.round(f.body.y * 1000)}`)].join("|");
   }
 }
 
