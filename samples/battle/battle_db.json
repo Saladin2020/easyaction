@@ -1,0 +1,785 @@
+{
+ "rules": {
+  "enemyScale": 8,
+  "crit": 6,
+  "maxLevel": 30,
+  "partySize": 3,
+  "xp": {
+   "base": 20,
+   "step": 12,
+   "quad": 3
+  },
+  "flee": 50,
+  "pointsPerLevel": 1
+ },
+ "heroes": [
+  {
+   "id": "ton",
+   "name": {
+    "th": "ต้น",
+    "en": "Ton",
+    "ms": "Ton"
+   },
+   "base": {
+    "hp": 46,
+    "mp": 12,
+    "atk": 14,
+    "def": 9,
+    "mag": 5,
+    "res": 6,
+    "spd": 10
+   },
+   "growth": {
+    "hp": 7,
+    "mp": 1.5,
+    "atk": 2.2,
+    "def": 1.4,
+    "mag": 0.5,
+    "res": 0.8,
+    "spd": 1.1
+   },
+   "tree": [
+    {
+     "id": "ton_fist",
+     "name": {
+      "th": "หมัดหนัก",
+      "en": "Heavy fists",
+      "ms": "Tumbukan berat"
+     },
+     "branch": "strike",
+     "pos": [
+      0,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "atk": 3
+     }
+    },
+    {
+     "id": "ton_knee",
+     "name": {
+      "th": "เข่าลอย",
+      "en": "Flying knee",
+      "ms": "Lutut terbang"
+     },
+     "branch": "strike",
+     "pos": [
+      0,
+      1
+     ],
+     "cost": 2,
+     "level": 4,
+     "requires": [
+      "ton_fist"
+     ],
+     "skill": "flying_knee"
+    },
+    {
+     "id": "ton_guard",
+     "name": {
+      "th": "การ์ดแน่น",
+      "en": "Tight guard",
+      "ms": "Kawalan rapat"
+     },
+     "branch": "guard",
+     "pos": [
+      1,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "def": 3,
+      "hp": 10
+     }
+    },
+    {
+     "id": "ton_spirit",
+     "name": {
+      "th": "ใจนักสู้",
+      "en": "Fighter's heart",
+      "ms": "Semangat pejuang"
+     },
+     "branch": "guard",
+     "pos": [
+      1,
+      1
+     ],
+     "cost": 2,
+     "level": 5,
+     "requires": [
+      "ton_guard"
+     ],
+     "stats": {
+      "hp": 25,
+      "spd": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "nurul",
+   "name": {
+    "th": "นูรุล",
+    "en": "Nurul",
+    "ms": "Nurul"
+   },
+   "base": {
+    "hp": 40,
+    "mp": 20,
+    "atk": 10,
+    "def": 8,
+    "mag": 11,
+    "res": 10,
+    "spd": 11
+   },
+   "growth": {
+    "hp": 5.5,
+    "mp": 2.5,
+    "atk": 1.4,
+    "def": 1.1,
+    "mag": 1.8,
+    "res": 1.5,
+    "spd": 1.2
+   },
+   "tree": [
+    {
+     "id": "nurul_herbs",
+     "name": {
+      "th": "สมุนไพรดี",
+      "en": "Good herbs",
+      "ms": "Herba baik"
+     },
+     "branch": "herbal",
+     "pos": [
+      0,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "mag": 2,
+      "mp": 6
+     }
+    },
+    {
+     "id": "nurul_mist",
+     "name": {
+      "th": "ยาหอมทั่วทีม",
+      "en": "Herbal mist",
+      "ms": "Kabus herba"
+     },
+     "branch": "herbal",
+     "pos": [
+      0,
+      1
+     ],
+     "cost": 2,
+     "level": 5,
+     "requires": [
+      "nurul_herbs"
+     ],
+     "skill": "jamu_all"
+    },
+    {
+     "id": "nurul_silat",
+     "name": {
+      "th": "ซีลัตว่องไว",
+      "en": "Swift silat",
+      "ms": "Silat pantas"
+     },
+     "branch": "silat",
+     "pos": [
+      1,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "spd": 2,
+      "atk": 2
+     }
+    },
+    {
+     "id": "nurul_tiger",
+     "name": {
+      "th": "ท่าเสือ",
+      "en": "Tiger step",
+      "ms": "Langkah harimau"
+     },
+     "branch": "silat",
+     "pos": [
+      1,
+      1
+     ],
+     "cost": 2,
+     "level": 4,
+     "requires": [
+      "nurul_silat"
+     ],
+     "skill": "tiger_step"
+    }
+   ]
+  },
+  {
+   "id": "mei",
+   "name": {
+    "th": "เหม่ย",
+    "en": "Mei",
+    "ms": "Mei"
+   },
+   "base": {
+    "hp": 34,
+    "mp": 24,
+    "atk": 7,
+    "def": 6,
+    "mag": 14,
+    "res": 9,
+    "spd": 12
+   },
+   "growth": {
+    "hp": 4.5,
+    "mp": 3,
+    "atk": 0.8,
+    "def": 0.9,
+    "mag": 2.3,
+    "res": 1.3,
+    "spd": 1.3
+   },
+   "tree": [
+    {
+     "id": "mei_spark",
+     "name": {
+      "th": "ประทัดแรง",
+      "en": "Bigger bangs",
+      "ms": "Mercun kuat"
+     },
+     "branch": "fire",
+     "pos": [
+      0,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "mag": 3
+     }
+    },
+    {
+     "id": "mei_drum",
+     "name": {
+      "th": "กลองฟ้า",
+      "en": "Sky drum",
+      "ms": "Gendang langit"
+     },
+     "branch": "fire",
+     "pos": [
+      0,
+      1
+     ],
+     "cost": 2,
+     "level": 6,
+     "requires": [
+      "mei_spark"
+     ],
+     "skill": "thunder_drum"
+    },
+    {
+     "id": "mei_string",
+     "name": {
+      "th": "สายป่านยาว",
+      "en": "Long kite string",
+      "ms": "Tali wau panjang"
+     },
+     "branch": "wind",
+     "pos": [
+      1,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "spd": 2,
+      "res": 2
+     }
+    },
+    {
+     "id": "mei_storm",
+     "name": {
+      "th": "พายุว่าว",
+      "en": "Kite storm",
+      "ms": "Ribut wau"
+     },
+     "branch": "wind",
+     "pos": [
+      1,
+      1
+     ],
+     "cost": 2,
+     "level": 5,
+     "requires": [
+      "mei_string"
+     ],
+     "skill": "kite_storm"
+    }
+   ]
+  },
+  {
+   "id": "adam",
+   "name": {
+    "th": "อาดัม",
+    "en": "Adam",
+    "ms": "Adam"
+   },
+   "base": {
+    "hp": 52,
+    "mp": 10,
+    "atk": 12,
+    "def": 12,
+    "mag": 6,
+    "res": 7,
+    "spd": 8
+   },
+   "growth": {
+    "hp": 7.5,
+    "mp": 1,
+    "atk": 1.8,
+    "def": 1.8,
+    "mag": 0.6,
+    "res": 0.9,
+    "spd": 0.8
+   },
+   "tree": [
+    {
+     "id": "adam_oar",
+     "name": {
+      "th": "พายแกร่ง",
+      "en": "Strong oar",
+      "ms": "Dayung kuat"
+     },
+     "branch": "oar",
+     "pos": [
+      0,
+      0
+     ],
+     "cost": 1,
+     "stats": {
+      "atk": 2,
+      "def": 2
+     }
+    },
+    {
+     "id": "adam_charge",
+     "name": {
+      "th": "พุ่งชน",
+      "en": "Charge",
+      "ms": "Rempuh"
+     },
+     "branch": "oar",
+     "pos": [
+      0,
+      1
+     ],
+     "cost": 2,
+     "level": 4,
+     "requires": [
+      "adam_oar"
+     ],
+     "skill": "charge"
+    },
+    {
+     "id": "adam_net",
+     "name": {
+      "th": "เหวี่ยงแห",
+      "en": "Net throw",
+      "ms": "Lempar jala"
+     },
+     "branch": "sea",
+     "pos": [
+      1,
+      0
+     ],
+     "cost": 1,
+     "skill": "net_throw"
+    },
+    {
+     "id": "adam_sea",
+     "name": {
+      "th": "ลูกทะเล",
+      "en": "Child of the sea",
+      "ms": "Anak laut"
+     },
+     "branch": "sea",
+     "pos": [
+      1,
+      1
+     ],
+     "cost": 2,
+     "level": 5,
+     "requires": [
+      "adam_net"
+     ],
+     "stats": {
+      "hp": 20,
+      "res": 3
+     }
+    }
+   ]
+  }
+ ],
+ "enemies": [
+  {
+   "id": "paddy_crab",
+   "name": {
+    "th": "ปูนา",
+    "en": "Paddy crab",
+    "ms": "Ketam sawah"
+   },
+   "level": 1,
+   "stats": {
+    "hp": 48,
+    "mp": 0,
+    "atk": 11,
+    "def": 12,
+    "mag": 2,
+    "res": 4,
+    "spd": 5
+   },
+   "xp": 6,
+   "coins": 4,
+   "art": "crab"
+  },
+  {
+   "id": "giant_mosquito",
+   "name": {
+    "th": "ยุงยักษ์",
+    "en": "Giant mosquito",
+    "ms": "Nyamuk gergasi"
+   },
+   "level": 1,
+   "stats": {
+    "hp": 31,
+    "mp": 6,
+    "atk": 10,
+    "def": 3,
+    "mag": 5,
+    "res": 3,
+    "spd": 14
+   },
+   "xp": 5,
+   "coins": 3,
+   "art": "mosquito"
+  },
+  {
+   "id": "monkey_thief",
+   "name": {
+    "th": "ลิงขโมยขนม",
+    "en": "Snack-thief monkey",
+    "ms": "Monyet pencuri"
+   },
+   "level": 2,
+   "stats": {
+    "hp": 57,
+    "mp": 4,
+    "atk": 12,
+    "def": 6,
+    "mag": 4,
+    "res": 5,
+    "spd": 13
+   },
+   "xp": 9,
+   "coins": 9,
+   "art": "monkey"
+  },
+  {
+   "id": "water_monitor",
+   "name": {
+    "th": "ตะกวดน้ำ",
+    "en": "Water monitor",
+    "ms": "Biawak"
+   },
+   "level": 3,
+   "stats": {
+    "hp": 88,
+    "mp": 4,
+    "atk": 16,
+    "def": 10,
+    "mag": 4,
+    "res": 6,
+    "spd": 7
+   },
+   "xp": 14,
+   "coins": 10,
+   "art": "monitor"
+  },
+  {
+   "id": "cobra",
+   "name": {
+    "th": "งูเห่า",
+    "en": "Cobra",
+    "ms": "Ular tedung"
+   },
+   "level": 3,
+   "stats": {
+    "hp": 66,
+    "mp": 10,
+    "atk": 13,
+    "def": 7,
+    "mag": 11,
+    "res": 8,
+    "spd": 12
+   },
+   "xp": 13,
+   "coins": 8,
+   "art": "cobra"
+  },
+  {
+   "id": "cave_bat",
+   "name": {
+    "th": "ค้างคาวถ้ำ",
+    "en": "Cave bat",
+    "ms": "Kelawar gua"
+   },
+   "level": 2,
+   "stats": {
+    "hp": 40,
+    "mp": 6,
+    "atk": 11,
+    "def": 4,
+    "mag": 6,
+    "res": 6,
+    "spd": 15
+   },
+   "xp": 8,
+   "coins": 5,
+   "art": "bat"
+  },
+  {
+   "id": "wild_boar",
+   "name": {
+    "th": "หมูป่า",
+    "en": "Wild boar",
+    "ms": "Babi hutan"
+   },
+   "level": 4,
+   "stats": {
+    "hp": 123,
+    "mp": 0,
+    "atk": 18,
+    "def": 12,
+    "mag": 2,
+    "res": 5,
+    "spd": 8
+   },
+   "xp": 20,
+   "coins": 12,
+   "art": "boar"
+  },
+  {
+   "id": "fighting_rooster",
+   "name": {
+    "th": "ไก่ชนดุ",
+    "en": "Fierce rooster",
+    "ms": "Ayam sabung garang"
+   },
+   "level": 2,
+   "stats": {
+    "hp": 53,
+    "mp": 0,
+    "atk": 14,
+    "def": 5,
+    "mag": 2,
+    "res": 4,
+    "spd": 14
+   },
+   "xp": 9,
+   "coins": 7,
+   "art": "rooster"
+  },
+  {
+   "id": "scorpion",
+   "name": {
+    "th": "แมงป่องช้าง",
+    "en": "Giant scorpion",
+    "ms": "Kala jengking"
+   },
+   "level": 3,
+   "stats": {
+    "hp": 70,
+    "mp": 0,
+    "atk": 14,
+    "def": 13,
+    "mag": 2,
+    "res": 5,
+    "spd": 9
+   },
+   "xp": 13,
+   "coins": 9,
+   "art": "scorpion"
+  },
+  {
+   "id": "road_bandit",
+   "name": {
+    "th": "โจรดักทาง",
+    "en": "Road bandit",
+    "ms": "Penyamun jalan"
+   },
+   "level": 4,
+   "stats": {
+    "hp": 106,
+    "mp": 8,
+    "atk": 17,
+    "def": 10,
+    "mag": 7,
+    "res": 7,
+    "spd": 11
+   },
+   "xp": 22,
+   "coins": 30,
+   "art": "bandit"
+  },
+  {
+   "id": "mud_blob",
+   "name": {
+    "th": "ก้อนโคลนดุ๊กดิ๊ก",
+    "en": "Mud blob",
+    "ms": "Gumpal lumpur"
+   },
+   "level": 1,
+   "stats": {
+    "hp": 44,
+    "mp": 4,
+    "atk": 8,
+    "def": 8,
+    "mag": 7,
+    "res": 6,
+    "spd": 6
+   },
+   "xp": 6,
+   "coins": 4,
+   "art": "mud"
+  },
+  {
+   "id": "runaway_kite",
+   "name": {
+    "th": "ว่าวหลุดลม",
+    "en": "Runaway kite",
+    "ms": "Wau terlepas"
+   },
+   "level": 3,
+   "stats": {
+    "hp": 57,
+    "mp": 12,
+    "atk": 10,
+    "def": 6,
+    "mag": 14,
+    "res": 10,
+    "spd": 16
+   },
+   "xp": 12,
+   "coins": 8,
+   "art": "kite"
+  },
+  {
+   "id": "river_crocodile",
+   "name": {
+    "th": "จระเข้ปากแม่น้ำ",
+    "en": "River-mouth crocodile",
+    "ms": "Buaya kuala"
+   },
+   "level": 8,
+   "stats": {
+    "hp": 792,
+    "mp": 20,
+    "atk": 30,
+    "def": 18,
+    "mag": 10,
+    "res": 12,
+    "spd": 9
+   },
+   "xp": 120,
+   "coins": 90,
+   "art": "crocodile"
+  },
+  {
+   "id": "highland_tiger",
+   "name": {
+    "th": "เสือโคร่งภูเขา",
+    "en": "Highland tiger",
+    "ms": "Harimau tanah tinggi"
+   },
+   "level": 10,
+   "stats": {
+    "hp": 936,
+    "mp": 24,
+    "atk": 35,
+    "def": 16,
+    "mag": 12,
+    "res": 14,
+    "spd": 15
+   },
+   "xp": 180,
+   "coins": 120,
+   "art": "tiger"
+  },
+  {
+   "id": "apple_snail",
+   "name": {
+    "th": "หอยเชอรี่",
+    "en": "Golden apple snail",
+    "ms": "Siput gondang emas"
+   },
+   "level": 1,
+   "stats": {
+    "hp": 52,
+    "mp": 4,
+    "atk": 9,
+    "def": 14,
+    "mag": 5,
+    "res": 6,
+    "spd": 3
+   },
+   "xp": 6,
+   "coins": 3,
+   "art": "snail"
+  },
+  {
+   "id": "field_rat",
+   "name": {
+    "th": "หนูนา",
+    "en": "Paddy rat",
+    "ms": "Tikus sawah"
+   },
+   "level": 2,
+   "stats": {
+    "hp": 40,
+    "mp": 0,
+    "atk": 12,
+    "def": 5,
+    "mag": 2,
+    "res": 4,
+    "spd": 15
+   },
+   "xp": 7,
+   "coins": 5,
+   "art": "rat"
+  },
+  {
+   "id": "restless_scarecrow",
+   "name": {
+    "th": "หุ่นไล่กาซุกซน",
+    "en": "Restless scarecrow",
+    "ms": "Orang-orang sawah nakal"
+   },
+   "level": 3,
+   "stats": {
+    "hp": 70,
+    "mp": 8,
+    "atk": 13,
+    "def": 9,
+    "mag": 8,
+    "res": 7,
+    "spd": 7
+   },
+   "xp": 12,
+   "coins": 8,
+   "art": "scarecrow"
+  }
+ ]
+}

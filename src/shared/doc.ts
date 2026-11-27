@@ -14,6 +14,7 @@ export const STRINGS: Record<string, Name & { ms: string }> = {
   "action.help": { th: "← → เดิน · Z/Space กระโดด · ↑↓ ปีน · J ตี · K ท่าหนัก", en: "← → move · Z/Space jump · ↑↓ climb · J strike · K heavy", ms: "← → gerak · Z/Space lompat · ↑↓ panjat · J pukul · K berat" },
   "action.climb": { th: "↑ ปีนบันได", en: "↑ climb", ms: "↑ panjat" },
   "action.coin": { th: "ได้เหรียญ", en: "Coin!", ms: "Syiling!" },
+  "action.fight": { th: "ต่อสู้", en: "Skirmish", ms: "Pertempuran" },
 };
 
 export const t = (key: string, lang: "th" | "en" | "ms" = "th") => STRINGS[key]?.[lang] ?? key;

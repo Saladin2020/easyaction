@@ -15,7 +15,7 @@ function battleSubset(db: BattleDbLike) {
 }
 
 const PIXI_HTML = (id: string) => `<!doctype html>
-<html lang="th"><head><meta charset="utf-8"><title>Easy Action — ${id}</title>
+<html lang="th"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>Easy Action — ${id}</title>
 <style>body{margin:0;background:#1a1410;color:#f3e7d3;font-family:system-ui}canvas{image-rendering:pixelated;width:960px;height:540px;display:block;margin:12px auto}p{text-align:center}</style></head>
 <body><p>← → เดิน · Space/Z กระโดด · ↑↓ ปีน · Enter = ต่อสู้แบบเรียลไทม์ · J ตี · K ท่าหนัก</p>
 <script>

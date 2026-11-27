@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "dev": "tsx src/cli.ts serve --dev",
-    "build": "npm run build:server && npm run build:web",
+    "build": "npm run build:core && npm run build:server && npm run build:web",
     "build:server": "tsup src/cli.ts src/mcp/server.ts --format esm --dts --clean --out-dir dist",
     "build:web": "vite build --config web/vite.config.ts",
     "serve": "tsx src/cli.ts serve",

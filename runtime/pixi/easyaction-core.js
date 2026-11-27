@@ -364,7 +364,8 @@ var STRINGS = {
   "action.draw": { th: "\u0E2B\u0E21\u0E14\u0E40\u0E27\u0E25\u0E32", en: "Time up", ms: "Masa tamat" },
   "action.help": { th: "\u2190 \u2192 \u0E40\u0E14\u0E34\u0E19 \xB7 Z/Space \u0E01\u0E23\u0E30\u0E42\u0E14\u0E14 \xB7 \u2191\u2193 \u0E1B\u0E35\u0E19 \xB7 J \u0E15\u0E35 \xB7 K \u0E17\u0E48\u0E32\u0E2B\u0E19\u0E31\u0E01", en: "\u2190 \u2192 move \xB7 Z/Space jump \xB7 \u2191\u2193 climb \xB7 J strike \xB7 K heavy", ms: "\u2190 \u2192 gerak \xB7 Z/Space lompat \xB7 \u2191\u2193 panjat \xB7 J pukul \xB7 K berat" },
   "action.climb": { th: "\u2191 \u0E1B\u0E35\u0E19\u0E1A\u0E31\u0E19\u0E44\u0E14", en: "\u2191 climb", ms: "\u2191 panjat" },
-  "action.coin": { th: "\u0E44\u0E14\u0E49\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D", en: "Coin!", ms: "Syiling!" }
+  "action.coin": { th: "\u0E44\u0E14\u0E49\u0E40\u0E2B\u0E23\u0E35\u0E22\u0E0D", en: "Coin!", ms: "Syiling!" },
+  "action.fight": { th: "\u0E15\u0E48\u0E2D\u0E2A\u0E39\u0E49", en: "Skirmish", ms: "Pertempuran" }
 };
 var t = (key, lang = "th") => STRINGS[key]?.[lang] ?? key;
 function resolveDoc(doc) {

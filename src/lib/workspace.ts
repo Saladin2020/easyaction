@@ -103,6 +103,8 @@ export async function loadBattleDb(root: string): Promise<BattleDbLike> {
     cfg.battle ? path.resolve(root, cfg.battle) : null,
     process.env.EASYBATTLE_HOME ? path.join(process.env.EASYBATTLE_HOME, "samples", "battles") : null,
     path.resolve(pkgRoot, "..", "easybattle", "samples", "battles"),
+    // bundled snapshot of the Easy Battle sample heroes / enemies (standalone installs, CI)
+    path.join(pkgRoot, "samples", "battle", "battle_db.json"),
   ].filter(Boolean) as string[];
   for (const c of candidates) {
     if (!existsSync(c)) continue;
